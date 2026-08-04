@@ -1,0 +1,72 @@
+import bcrypt from "bcryptjs";
+import { prisma } from "../../lib/prisma";
+import { IloginUser } from "./interface";
+import jwt, { SignOptions } from "jsonwebtoken";
+import config from "../../config";
+import { jwtUtils } from "../../utils/jwt";
+
+const loginUserDB = async (payload: IloginUser) => {
+  const { email, password } = payload;
+  // 1: 1st check if email exist or not
+
+  // const user = await prisma.user.findUnique({
+  //     where: {email}
+  // })
+
+  // if(!user){
+  // throw new Error("User Already Exists!")
+  // }
+
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { email },
+  });
+
+  if (user.activeStatus === "BLOCKED") {
+    throw new Error("Your account has been blocked. Please contact support.");
+  }
+
+  // 2: 2nd password match or not:
+  const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordMatched) {
+    throw new Error("Password is Incorrect!");
+  }
+
+  const jwtPayload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+  // accessToken:
+  // const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret, {
+  //   expiresIn: config.jwt_access_expires_in,
+  // } as SignOptions);
+
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
+
+  // refreshToken:
+  // const refreshToken = jwt.sign({ jwtPayload }, config.jwt_refresh_secret, {
+  //   expiresIn: config.jwt_refresh_expires_in,
+  // } as SignOptions);
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+    user,
+  };
+};
+
+export const authService = {
+  loginUserDB,
+};

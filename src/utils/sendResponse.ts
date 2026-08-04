@@ -1,0 +1,57 @@
+import { Response } from "express";
+
+type Tmeta = {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+type TResponseData<T> = {
+    success: boolean;
+    statusCode: number;
+    message: string;
+    data: T;
+    meta?: Tmeta
+}
+
+export const sendResponse = <T>(res: Response, data: TResponseData<T>) => {
+    res.status(data.statusCode).json({
+        success: data.success,
+        statusCode: data.statusCode,
+        message: data.meta,
+        data: data,
+        meta: data.meta
+    })
+}
+
+
+
+
+
+
+
+// import { Response } from "express";
+
+// type Tmeta = {
+//   page: number;
+//   limit: number;
+//   total: number;
+// };
+
+// type TResponseData<T> = {
+//   success: boolean;
+//   statusCode: number;
+//   message: string;
+//   data: T;
+//   meta?: Tmeta;
+// };
+
+// export const sendResponse = <T>(res: Response, data: TResponseData<T>) => {
+//   res.status(data.statusCode).json({
+//     success: data.success,
+//     statusCode: data.statusCode,
+//     message: data.message,
+//     data: data,
+//     meta: data.meta,
+//   });
+// };
