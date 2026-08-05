@@ -3,9 +3,6 @@ import httpstatus from "http-status-codes";
 import { userService } from "./user.service";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
-import { jwtUtils } from "../../utils/jwt";
-import config from "../../config";
-import { JwtPayload } from "jsonwebtoken";
  
 
 
@@ -14,15 +11,6 @@ const createUser = catchAsync(
     const payload = req.body;
 
     const user = await userService.createUserIntoDB(payload);
-
-    // res.status(httpstatus.CREATED).json({
-    //     success: true,
-    //     statusCode: httpstatus.CREATED,
-    //     message: "User created successfully!",
-    //     data: {
-    //       user,
-    //     },
-    //   });
 
     sendResponse(res, {
       success: true,
