@@ -1,0 +1,252 @@
+{
+  "info": {
+    "_postman_id": "47b680ee-8efd-4073-8f54-9eff8b03af2b",
+    "name": "Prisma-Press_backend new",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49919048",
+    "_collection_link": "https://go.postman.co/collection/49919048-47b680ee-8efd-4073-8f54-9eff8b03af2b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CreateUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"physics\",\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\",\n    \"profilePhoto\": \"www.google.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "users",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserProfile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/users/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "users",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "loginUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateUserProfile",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"chopol321lawra\",\n    \"profilePhoto\": \"youtube.facebook.com\",\n    \"bio\": \"chopoler bio\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/my-profile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "users",
+            "my-profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "refresh-token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/auth/refresh-token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "auth",
+            "refresh-token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createPost",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"THos is my third posts\",\n  \"content\": \"Prisma is a modern ORM that makes working with databases in Node.js and TypeScript simple and type-safe. In this post, we'll explore how to set up Prisma, define models, and perform CRUD operations.\",\n  \"thumbnail\": \"https://images.unsplash.com/photo-1516321318423-f06f85e504b3\",\n  \"isFeatured\": true,\n  \"status\": \"PUBLISHED\",\n  \"tags\": [\n    \"Prisma\",\n    \"Node.js\",\n    \"Express\",\n    \"TypeScript\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllPosts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getPostById",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"THos is my third posts\",\n  \"content\": \"Prisma is a modern ORM that makes working with databases in Node.js and TypeScript simple and type-safe. In this post, we'll explore how to set up Prisma, define models, and perform CRUD operations.\",\n  \"thumbnail\": \"https://images.unsplash.com/photo-1516321318423-f06f85e504b3\",\n  \"isFeatured\": true,\n  \"status\": \"PUBLISHED\",\n  \"tags\": [\n    \"Prisma\",\n    \"Node.js\",\n    \"Express\",\n    \"TypeScript\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/posts/2b33a5ba-6508-4918-8881-03897de50c5e",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "posts",
+            "2b33a5ba-6508-4918-8881-03897de50c5e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetMyPost",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/posts/my-posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "posts",
+            "my-posts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -28,18 +28,18 @@ export const auth = (...requiredRoles: Role[]) => {
       throw new Error("you are not logged in. Please log in to access this resource!.");
      };
 
-     console.log({
-  token,
-  type: typeof token,
-  cookie: req.cookies.accessToken,
-  authorization: req.headers.authorization,
-});
+//      console.log({
+//   token,
+//   type: typeof token,
+//   cookie: req.cookies.accessToken,
+//   authorization: req.headers.authorization,
+// });
 
      const verifiedToken = jwtUtils.verifyToken(
       token,
       config.jwt_access_secret,
     );
-    console.log("before", verifiedToken);
+    // console.log("before", verifiedToken);
 
 
     if(!verifiedToken.success){

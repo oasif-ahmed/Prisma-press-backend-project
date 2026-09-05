@@ -35,21 +35,78 @@ const getAllPosts = catchAsync(
     })
   },
 );
-const getPostsStats = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+const getPostById = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params.postId;
+    console.log(postId);
+    if(!postId){
+      throw new Error("Post ID Required");
+    }
+    const result = await postService.getPostById(postId as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpstatus.OK,
+      message: "Get post by ID successfully!",
+      data: result
+    })
+  },
 );
 const getMyPosts = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
-);
-const getPostById = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
-);
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id;
+    const result = await postService.getMyPosts(userId as string);
 
+    sendResponse(res, {
+      success: true,
+      statusCode: httpstatus.OK,
+      message: "Posts Retrived Successfully!",
+      data: result
+    })
+  },
+);
 const updatePost = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
-);
+  async (req: Request, res: Response, next: NextFunction) => {
+    const authorId = req.user?.id;
+    const isAdmin = req.user?.role === "ADMIN";
 
+    const postId = req.params.postId;
+    if(!postId){
+      throw new Error("Post ID Required");
+    }
+    const payload = req.body;
+
+    const result = await postService.updatePost(postId as string, payload, authorId as string, isAdmin);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpstatus.OK,
+      message: "Post Updated SuccessFully!",
+      data: result
+    })
+  },
+);
 const deletePost = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const authorId = req.user?.id;
+    const isAdmin = req.user?.role === "ADMIN";
+
+    const postId = req.params.postId;
+    if(!postId){
+      throw new Error("Post ID Required");
+    }
+
+    const result = await postService.deletePost(postId as string, authorId as string, isAdmin);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpstatus.OK,
+      message: "Post deleted SuccessFully!",
+      data: result
+    })
+  },
+);
+const getPostsStats = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {},
 );
 

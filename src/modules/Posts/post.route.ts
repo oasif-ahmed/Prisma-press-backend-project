@@ -9,6 +9,7 @@ router.post("/", auth(Role.USER, Role.ADMIN), postController.createPost);
 router.get("/", postController.getAllPosts);
 router.get("/stats", auth(Role.ADMIN), postController.getPostsStats);
 router.get("/my-posts", auth(Role.USER, Role.ADMIN), postController.getMyPosts);
+router.get("/:postId", auth(Role.USER, Role.ADMIN), postController.getPostById);
 router.patch("/:postId", auth(Role.USER, Role.ADMIN), postController.updatePost);
 router.delete("/:postId", auth(Role.USER, Role.ADMIN), postController.deletePost);
 
