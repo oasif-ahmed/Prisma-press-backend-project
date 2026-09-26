@@ -1,0 +1,349 @@
+[
+  {
+    "v": 12,
+    "id": "70c1a995-2f24-4838-8531-efe262d06f44",
+    "name": "Prisma-Press_backend new",
+    "folders": [],
+    "requests": [
+      {
+        "v": "17",
+        "id": "req_msozkqmv_e01df2ad-b2ca-475f-8892-c28e13ebfe7a",
+        "name": "CreateUser",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/api/users/register",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n    \"name\": \"physics\",\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\",\n    \"profilePhoto\": \"www.google.com\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_7d7f6287-25de-4f29-97e9-a0a9f4c3ed71",
+        "name": "loginUser",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/api/auth/login",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_93d9b2df-99df-4ee4-a222-36873bb6cd13",
+        "name": "updateUserProfile",
+        "method": "PUT",
+        "endpoint": "http://localhost:3000/api/users/my-profile",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n    \"name\": \"chopol321lawra\",\n    \"profilePhoto\": \"youtube.facebook.com\",\n    \"bio\": \"chopoler bio\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_f994209a-3e18-4122-96c6-5764701e3a32",
+        "name": "refresh-token",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/api/auth/refresh-token",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "text/plain",
+          "body": "{\n    \"email\": \"physics@gmail.com\",\n    \"password\": \"physics123\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_290f3a6e-e34f-4434-b36f-7c60657defb5",
+        "name": "getUserProfile",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/users/me",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_451dff79-d377-4e9a-9f7a-9ecb1e2238f8",
+        "name": "createPost",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/api/posts",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"title\": \"THos is my third posts\",\n  \"content\": \"Prisma is a modern ORM that makes working with databases in Node.js and TypeScript simple and type-safe. In this post, we'll explore how to set up Prisma, define models, and perform CRUD operations.\",\n  \"thumbnail\": \"https://images.unsplash.com/photo-1516321318423-f06f85e504b3\",\n  \"isFeatured\": true,\n  \"status\": \"PUBLISHED\",\n  \"tags\": [\n    \"Prisma\",\n    \"Node.js\",\n    \"Express\",\n    \"TypeScript\"\n  ]\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_71e90aba-4cd9-4bc1-bc79-96e6ebd6fa7a",
+        "name": "getAllPosts",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/posts",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_151b0a79-b436-4e96-9873-ad2783e4f8cb",
+        "name": "getPostById",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/posts/a5155597-b576-44df-b5e5-38c8673b087c",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "text/plain",
+          "body": "{\n  \"title\": \"THos is my third posts\",\n  \"content\": \"Prisma is a modern ORM that makes working with databases in Node.js and TypeScript simple and type-safe. In this post, we'll explore how to set up Prisma, define models, and perform CRUD operations.\",\n  \"thumbnail\": \"https://images.unsplash.com/photo-1516321318423-f06f85e504b3\",\n  \"isFeatured\": true,\n  \"status\": \"PUBLISHED\",\n  \"tags\": [\n    \"Prisma\",\n    \"Node.js\",\n    \"Express\",\n    \"TypeScript\"\n  ]\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "req_msozkqmv_37e63be8-6df6-4529-8a96-c20eba333d00",
+        "name": "GetMyPost",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/posts/my-posts",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "text/plain",
+          "body": ""
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "1768468c-1afe-44e2-9955-91e2f4de839a",
+        "name": "updatePost",
+        "method": "PATCH",
+        "endpoint": "http://localhost:3000/api/posts/2b33a5ba-6508-4918-8881-03897de50c5e",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"title\": \"THos is my third and updated post!!!\",\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "f749ed6f-2012-49d1-a54a-51f9a814a88e",
+        "name": "deletePost",
+        "method": "DELETE",
+        "endpoint": "http://localhost:3000/api/posts/4dcaec32-11cc-4f02-a08c-734c218cc100",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "ea4238e7-94db-44c0-9e55-a0d43816946f",
+        "name": "Create-comment",
+        "method": "POST",
+        "endpoint": "http://localhost:3000/api/comments/v1",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"content\": \"this is my second comment\",\n  \"postId\": \"a5155597-b576-44df-b5e5-38c8673b087c\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "7799e39b-9efb-4f27-94a6-e6127626a241",
+        "name": "getCommentsbyAuthorId",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/comments/author/08e3abd7-fead-415c-b652-e2a50c739472",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "4ad7e457-41ae-4e72-b164-1e30818a4256",
+        "name": "updateCommentByCommentId",
+        "method": "PATCH",
+        "endpoint": "http://localhost:3000/api/comments/9ca6f709-d603-4cf8-b4bb-cb856fbac69e",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      },
+      {
+        "v": "17",
+        "id": "9bd906d3-a5da-42fb-9b3b-8a0252ff457f",
+        "name": "getPostStats",
+        "method": "GET",
+        "endpoint": "http://localhost:3000/api/posts/stats",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "description": null
+      }
+    ],
+    "description": null,
+    "auth": {
+      "authType": "inherit",
+      "authActive": true
+    },
+    "headers": [],
+    "variables": [],
+    "preRequestScript": "",
+    "testScript": ""
+  }
+]

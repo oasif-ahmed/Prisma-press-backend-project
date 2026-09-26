@@ -1,6 +1,10 @@
 import { CommentStatus, PostStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
-import { ICreatePostPayload, IUpdatePostPayload } from "./post.interface";
+import {
+  ICreatePostPayload,
+  IPostQuery,
+  IUpdatePostPayload,
+} from "./post.interface";
 
 const createPost = async (payload: ICreatePostPayload, userId: string) => {
   const result = await prisma.post.create({
@@ -11,8 +15,124 @@ const createPost = async (payload: ICreatePostPayload, userId: string) => {
   });
   return result;
 };
-const getAllPosts = async () => {
+
+const getAllPosts = async (query: IPostQuery) => {
+  const limit = query.limit ? Number(query.limit) : 10;
+  const page = query.page ? Number(query.page) : 1;
+  const skip = (page -1) * limit;
+  const sortBy = query.sortBy ? query.sortBy : "createdAt";
+  const sortOrder = query.sortOrder ? query.sortOrder : "desc";
+
   const posts = await prisma.post.findMany({
+    // searching with partial match
+
+    // where: {
+    //   title: {
+    //     contains: "ronaldo",
+    //     mode: "insensitive"
+    //   },
+
+    //   // not ideal for partial match
+    //   // content: {
+    //   //   contains: "Ronaldo"
+    //   // }
+    // },
+
+    // where: {
+    //   OR: [
+    //     {
+    //       title: {
+    //         contains: "Ronaldo",
+    //         mode: "insensitive"
+    //       },
+    //     },
+
+    //     {
+    //       content: {
+    //         contains: "Ronaldo",
+    //         mode: "insensitive"
+    //       }
+    //     }
+    //   ]
+    // },
+
+    // combining serach and filtering
+    // search uses OR operator and filtering uses AND operator
+
+    // where: {
+    //   // filtering and searching combined
+    //   AND: [
+    //     {
+    //       // searching
+    //       OR: [
+    //         {
+    //           title: {
+    //             contains: "Ron",
+    //             mode: "insensitive"
+    //           }
+    //         },
+    //         {
+    //           content: {
+    //             contains: "Ron",
+    //             mode: "insensitive"
+    //           }
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: "Ronaldo Nazario"
+    //     },
+    //     {
+    //       content: "Ronaldo"
+    //     }
+    //   ]
+    // },
+
+    // take: 1,
+    // for first page skip is 0
+    // skip: 1, //visiting page 2
+    // skip: 13, // visiting page 3
+    // skip: 3, // visiting page 4
+
+    // dynamically
+    where: {
+      AND: [
+        query.searchTerm
+          ? {
+              OR: [
+                {
+                  title: {
+                    contains: query.searchTerm,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  content: {
+                    contains: query.searchTerm,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
+
+        // title filtering
+        query.title ? { title: query.title } : {},
+
+        // content filtering
+        query.content ? { content: query.content } : {},
+      ],
+    },
+
+    take: limit,
+    skip: skip,
+
+    orderBy: {
+      // sortBy : sortOrder
+      [sortBy] : sortOrder
+    },
+    
+
     include: {
       author: true,
       comments: true,
@@ -247,14 +367,14 @@ const getPostsStats = async () => {
     // let totalPostViews = totalPostViewsAggregate._sum.view;
 
     // return {
-      // totalPosts,
-      // totalPublishedPost,
-      // totalApprovedComments,
-      // totalDraftPost,
-      // totalArchivedPost,
-      // totalComments,
-      // totalRejectedComments,
-      // totalPostViews
+    // totalPosts,
+    // totalPublishedPost,
+    // totalApprovedComments,
+    // totalDraftPost,
+    // totalArchivedPost,
+    // totalComments,
+    // totalRejectedComments,
+    // totalPostViews
     // }
 
     // ato gula querr aivabe likha uchit na
@@ -267,7 +387,7 @@ const getPostsStats = async () => {
       totalComments,
       totalApprovedComments,
       totalRejectedComments,
-      totalPostViews
+      totalPostViews,
     ] = await Promise.all([
       await tx.post.count(),
       await tx.post.count({
@@ -302,10 +422,10 @@ const getPostsStats = async () => {
         },
       }),
       await tx.post.aggregate({
-      _sum: {
-        view: true
-      }
-    })
+        _sum: {
+          view: true,
+        },
+      }),
     ]);
 
     return {
@@ -316,8 +436,8 @@ const getPostsStats = async () => {
       totalComments,
       totalApprovedComments,
       totalRejectedComments,
-      totalPostViews: totalPostViews._sum.view
-    }
+      totalPostViews: totalPostViews._sum.view,
+    };
   });
   return transactionResult;
 };
