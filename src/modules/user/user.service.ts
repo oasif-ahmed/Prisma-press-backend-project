@@ -5,12 +5,6 @@ import { CreateUserPayload } from "./user.interface";
 
 const createUserIntoDB = async (payload: CreateUserPayload) => {
   const { name, email, password, profilePhoto } = payload;
-  const isUserExist = await prisma.user.findUnique({
-    where: { email },
-  });
-  if (isUserExist) {
-    throw new Error("Users Already Exists!");
-  }
 
   const hashedPassword = await bcrypt.hash(
     password,
