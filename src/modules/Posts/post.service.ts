@@ -7,6 +7,21 @@ import {
 } from "./post.interface";
 
 const createPost = async (payload: ICreatePostPayload, userId: string) => {
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    },
+    include: {
+      subscription: true
+    }
+  })
+
+  if(payload.isPremium && user?.subscription?.status !== "ACTIVE"){
+    throw new Error("ou cannot create premium content subscribe first!")
+  }
+
+
   const result = await prisma.post.create({
     data: {
       ...payload,
@@ -124,6 +139,7 @@ const getAllPosts = async (query: IPostQuery) => {
       ],
     },
 
+
     take: limit,
     skip: skip,
 
@@ -156,6 +172,7 @@ const getPostById = async (postId: string) => {
     const post = await tx.post.findFirstOrThrow({
       where: {
         id: postId,
+        isPremium: false
       },
       include: {
         author: {
